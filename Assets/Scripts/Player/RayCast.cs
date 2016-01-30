@@ -7,7 +7,6 @@ public class RayCast : MonoBehaviour {
     // Use this for initialization
     void Start () {
         shadowPoints = new Vector2[45];
-
     }
 	
 	// Update is called once per frame

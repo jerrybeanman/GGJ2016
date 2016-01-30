@@ -16,6 +16,9 @@ public class Movement : MonoBehaviour {
 
     //Vertical movement. 1 is up, -1 is down, 0 is no movement.
     private float movey;
+
+    private GameObject target = null;
+    private bool doneLunge = false;
     
 	private Animator 	animator;
 	private Rigidbody2D rb2d;
@@ -32,6 +35,7 @@ public class Movement : MonoBehaviour {
     
     //Called every frame
     void FixedUpdate() {
+<<<<<<< HEAD
         //Get the x and y movement
 		movex = Input.GetAxis("Horizontal");
 		movey = Input.GetAxis("Vertical");
@@ -45,6 +49,26 @@ public class Movement : MonoBehaviour {
 		{
 			transform.localRotation = Quaternion.Euler(0,0, -90);
 
+=======
+        if (target == null && doneLunge == false)
+        {
+            //Get the x and y movement
+            movex = Input.GetAxis("Horizontal");
+            movey = Input.GetAxis("Vertical");
+            //Add velocity to the object based on this velocity.
+            GetComponent<Rigidbody2D>().velocity = new Vector2(movex * Speed, movey * Speed);
+        }
+    }
+
+    void Update()
+    {
+        if (target != null && doneLunge == false)
+        {
+            float step = 20 * Time.deltaTime;
+            transform.position = Vector3.MoveTowards(transform.position, target.transform.position, step);
+        }
+    }
+>>>>>>> 876720857c999be186d3bde7b07606b1936aab9e
 
 		}else if(movex > 0)
 		{
@@ -54,8 +78,23 @@ public class Movement : MonoBehaviour {
 	}
     void DashToEnemy(GameObject target)
     {
+<<<<<<< HEAD
         Vector2 direction = (target.transform.position - transform.position).normalized;
 		rb2d.AddForce(direction * 10000);
+=======
+        this.target = target;
+    }
+
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.tag == "Human" && target != null && Vector2.Distance(transform.position, other.transform.position) < 2)
+        {
+            doneLunge = true;
+            transform.position = Vector3.MoveTowards(transform.position, transform.position, 0);
+            GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
+            Destroy(other.gameObject);
+        }
+>>>>>>> 876720857c999be186d3bde7b07606b1936aab9e
     }
 }
 

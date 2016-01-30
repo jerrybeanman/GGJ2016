@@ -30,5 +30,12 @@ public class Movement : MonoBehaviour {
         //Add velocity to the object based on this velocity.
         GetComponent<Rigidbody2D>().velocity = new Vector2(movex * Speed, movey * Speed);
     }
+
+    void DashToEnemy(GameObject target)
+    {
+        Debug.Log("Dashing");
+        Vector2 direction = (target.transform.position - transform.position).normalized;
+        GetComponent<Rigidbody2D>().AddForce(direction * 10);
+    }
 }
 

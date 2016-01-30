@@ -16,7 +16,10 @@ public class PressurePlateCollision : MonoBehaviour {
     {
         if (other.gameObject.tag == "Player")
         {
-            GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, 0f);
+            foreach(var sprRenderer in GetComponentsInChildren<SpriteRenderer>())
+            {
+                sprRenderer.color = new Color(1f, 1f, 1f, 0f);
+            }
         }
     }
 
@@ -25,7 +28,10 @@ public class PressurePlateCollision : MonoBehaviour {
     {
         if (other.gameObject.tag == "Player")
         {
-            GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, 1f);
+            foreach (var sprRenderer in GetComponentsInChildren<SpriteRenderer>())
+            {
+                sprRenderer.color = new Color(1f, 1f, 1f, 1f);
+            }
         }
     }
 }

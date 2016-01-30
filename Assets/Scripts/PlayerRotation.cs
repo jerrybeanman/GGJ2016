@@ -7,11 +7,13 @@ Quick PlayerRotation to look at mouse script.
 */
 
 public class PlayerRotation : MonoBehaviour {
+    Vector3 curPos;
+    Vector3 lastPos;
     //Updates the characters rotation every frame
     void FixedUpdate() {
-        //Get the mouses position in the world
-        Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        //Rotate towards that mouse
-        transform.rotation = Quaternion.LookRotation(Vector3.forward, mousePosition - transform.position);
+        if (Input.GetAxis("Horizontal") + Input.GetAxis("Vertical") != 0 && GetComponent<Rigidbody2D>().velocity.magnitude >= 0.8)
+        {
+            transform.rotation = Quaternion.LookRotation(Vector3.forward, GetComponent<Rigidbody2D>().velocity);
+        } 
     }
 }

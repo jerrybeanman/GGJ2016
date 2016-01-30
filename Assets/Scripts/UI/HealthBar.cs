@@ -29,14 +29,9 @@ public class HealthBar : MonoBehaviour {
 	{
 		// Fills the health bar getting the current position and moves it up using the recoveryRate up to maxHunger point.
 		image.fillAmount = Mathf.MoveTowards(image.fillAmount, maxHunger, Time.deltaTime * recoveryRate);
-<<<<<<< HEAD
 		if (image.fillAmount == 1.0f) 
 		{
 			//Debug.Log ("game Over");
 		}
-=======
->>>>>>> 979fae45775648bc032e54335008ac9b05179b1b
 	}
-
-
 }

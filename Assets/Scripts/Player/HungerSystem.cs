@@ -11,13 +11,8 @@ public class HungerSystem : MonoBehaviour {
     private float timeLeft;
     //Local amount of hunger, this is the actual amount.
     private int hunger;
-
-	public Image image;
+	
     
-	// Use this for initialization
-	void Start () {
-		image = GetComponent<Image> ();
-	}
 	
 	// Every frame updates hunger & time left
 	void Update () {
@@ -36,7 +31,9 @@ public class HungerSystem : MonoBehaviour {
     {
         if (other.gameObject.tag == "Food")
         {
-			image.fillAmount -= 0.2f;
+			Image image = HealthBar.Instance.image;
+			HealthBar.Instance.image.fillAmount -= 0.2f;
+			Destroy(other.gameObject);
         }
     }
 }

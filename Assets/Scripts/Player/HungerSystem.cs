@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 public class HungerSystem : MonoBehaviour {
@@ -10,11 +11,12 @@ public class HungerSystem : MonoBehaviour {
     private float timeLeft;
     //Local amount of hunger, this is the actual amount.
     private int hunger;
+
+	public Image image;
     
 	// Use this for initialization
 	void Start () {
-        timeLeft = TimeToStarve;
-        hunger = Hunger;
+		image = GetComponent<Image> ();
 	}
 	
 	// Every frame updates hunger & time left
@@ -24,6 +26,7 @@ public class HungerSystem : MonoBehaviour {
 
         if (timeLeft >= TimeToStarve)
         {
+			
             Debug.Log("Game Over");
         }
     }
@@ -33,11 +36,7 @@ public class HungerSystem : MonoBehaviour {
     {
         if (other.gameObject.tag == "Food")
         {
-            Destroy(other.gameObject);
-            if (timeLeft + 10 <= TimeToStarve)
-                timeLeft += 10;
-            else
-                timeLeft = TimeToStarve;
+			image.fillAmount -= 0.2f;
         }
     }
 }

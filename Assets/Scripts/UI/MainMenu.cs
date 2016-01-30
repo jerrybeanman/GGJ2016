@@ -3,20 +3,12 @@ using System.Collections;
 
 public class MainMenu : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
-
+	// Button function to start the game with level 0.
 	public void StartGame(){
 		Application.LoadLevel(0);
 	}
 
+	// Button fucntion to quit the game.
 	public void QuitGame(){
 		Application.Quit ();
 	}

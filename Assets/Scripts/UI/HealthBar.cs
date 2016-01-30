@@ -3,19 +3,25 @@ using UnityEngine.UI;
 using System.Collections;
 
 public class HealthBar : MonoBehaviour {
-
+	public static HealthBar Instance { get; private set; }
 	// Max hunger point.
 	public float maxHunger;
 	// How fast the hunger bar goes up.
 	public float recoveryRate;
 	// Healthbar image.
-	private Image image; 
+	[HideInInspector]
+	public Image image; 
 	//public GameObject player;
 
 	void Start()
 	{
 		image = GetComponent<Image> ();
-		//player = GameObject.Find ("Player");
+		if (Instance != null) {
+			DestroyImmediate(gameObject);
+			return;
+		}
+		Instance = this;
+		DontDestroyOnLoad(gameObject);
 	}
 
 	// Update is called once per frame
@@ -32,8 +38,9 @@ public class HealthBar : MonoBehaviour {
 	{
 		if (other.gameObject.tag == "Food")
 		{
-			Debug.Log ("touched Food");
-			image.fillAmount -= 0.2f;
+			Image image = HealthBar.Instance.image;
+			HealthBar.Instance.image.fillAmount = 
+				Mathf.MoveTowards(image.fillAmount, image.fillAmount - 0.2f, Time.deltaTime);
 		}
 	}
 }

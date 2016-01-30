@@ -2,10 +2,11 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class PredictedMovement : MonoBehaviour 
+public class Civilian : MonoBehaviour 
 {
-	public Route 	route;
+	public Route 		route;
 	/* The walking speed */
+	[HideInInspector]
 	public float 		PatrolSpeed;
 	/* Keep repeating the between the waypoints*/
 	public bool 		Loop;
@@ -20,6 +21,7 @@ public class PredictedMovement : MonoBehaviour
 	private int 				_CurrentWaypoint;
 	private CharacterController _Character;
 
+	
 	void Start()
 	{
 		Waypoints = route.Waypoints;
@@ -62,7 +64,7 @@ public class PredictedMovement : MonoBehaviour
 		/* Rotate and move the character to that position */
 		else
 		{
-			/* Rotate towards target*/
+			/* Rotate towards target */
 			float angle = Mathf.Atan2(move_direction.y, move_direction.x) * Mathf.Rad2Deg;
 			Quaternion q = Quaternion.AngleAxis(angle - 90, Vector3.forward);
 			transform.rotation = Quaternion.Slerp(transform.rotation, q, Time.deltaTime * DampingLook);

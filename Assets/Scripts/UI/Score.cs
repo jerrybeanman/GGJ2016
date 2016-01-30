@@ -5,6 +5,7 @@ using System.Collections;
 public class Score : MonoBehaviour {
 
 	public Text score;
+
 	private float scoreCounter;
 
 	void Start ()
@@ -19,8 +20,13 @@ public class Score : MonoBehaviour {
 	}
 
 	// Increase score by 1.
-	void increaseScore(){
-		scoreCounter++;
+	void increaseScore()
+	{
+		/* Spawn a civilian every "CivilianSpawnInterval" seconds*/
+		if((scoreCounter++ % CivilianManager.Instance.CivilianSpawnInterval) == 0)
+		{
+			CivilianManager.Instance.SpawnRandomCivilian();
+		}
 	}
 
 	// Sets the score text.

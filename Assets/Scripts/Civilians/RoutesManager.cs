@@ -13,15 +13,17 @@ public class RoutesManager : MonoBehaviour {
 		}
 		Instance = this;
 		DontDestroyOnLoad(gameObject);
-		GetChild();
+		Routes = GetChilds();
 	}
 
-	void GetChild()
+	public List<Route> GetChilds()
 	{
+		Routes.Clear();
 		foreach(Transform child in transform)
 		{
 			Route route = child.gameObject.GetComponent<Route>();
 			Routes.Add(route);
 		}
+		return Routes;
 	}
 }

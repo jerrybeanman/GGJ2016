@@ -9,8 +9,7 @@ public class HungerSystem : MonoBehaviour {
     {
         if (other.gameObject.tag == "Food")
         {
-			Image image = HealthBar.Instance.image;
-			HealthBar.Instance.image.fillAmount -= 0.2f;
+			HealthBar.Instance.image.fillAmount -= (float)(other.gameObject.GetComponent<Food>().type+1) * 0.1f;
 			Destroy(other.gameObject);
         }
     }

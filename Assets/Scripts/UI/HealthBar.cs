@@ -31,17 +31,9 @@ public class HealthBar : MonoBehaviour {
 		image.fillAmount = Mathf.MoveTowards(image.fillAmount, maxHunger, Time.deltaTime * recoveryRate);
 		if (image.fillAmount == 1.0f) 
 		{
-			Debug.Log ("game Over");
+			//Debug.Log ("game Over");
 		}
 	}
 
-	void OnTriggerEnter2D(Collider2D other)
-	{
-		if (other.gameObject.tag == "Food")
-		{
-			Image image = HealthBar.Instance.image;
-			HealthBar.Instance.image.fillAmount = 
-				Mathf.MoveTowards(image.fillAmount, image.fillAmount - 0.2f, Time.deltaTime);
-		}
-	}
+
 }

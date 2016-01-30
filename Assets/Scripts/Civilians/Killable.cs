@@ -9,6 +9,8 @@ public class Killable : MonoBehaviour {
         if (other.gameObject.tag == "KillMask")
         {
             Debug.Log("Died");
+            
+            other.SendMessage("DashToEnemy", this.gameObject);
         }
     }
 }

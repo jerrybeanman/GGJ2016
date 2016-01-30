@@ -5,6 +5,7 @@ using System.Collections;
 Carson:
 Basic WASD absolute/static movement.
 */
+using UnityEngine.UI;
 
 public class Movement : MonoBehaviour {
     //Speed to move at
@@ -29,6 +30,12 @@ public class Movement : MonoBehaviour {
         movey = Input.GetAxis("Vertical");
         //Add velocity to the object based on this velocity.
         GetComponent<Rigidbody2D>().velocity = new Vector2(movex * Speed, movey * Speed);
+    }
+
+    void DashToEnemy(GameObject target)
+    {
+        Vector2 direction = (target.transform.position - transform.position).normalized;
+        GetComponent<Rigidbody2D>().AddForce(direction * 10000);
     }
 }
 

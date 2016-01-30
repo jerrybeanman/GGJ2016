@@ -3,16 +3,7 @@ using System.Collections;
 
 public class Killable : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
-
+    //On collision with the vision infront of our player, die
     void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.tag == "KillMask")

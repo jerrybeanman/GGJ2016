@@ -1,10 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class PredictedMovement : MonoBehaviour 
 {
-	/* Number of waypoints */
-	public Transform[] 	Waypoints;
+	public Route 	route;
 	/* The walking speed */
 	public float 		PatrolSpeed;
 	/* Keep repeating the between the waypoints*/
@@ -14,18 +14,21 @@ public class PredictedMovement : MonoBehaviour
 	/* How long to pause at a waypoint */
 	public float 		PauseDuration;
 
+	/* Number of waypoints */
+	private List<Transform> 	Waypoints;
 	private float 				_CurTime;
 	private int 				_CurrentWaypoint;
 	private CharacterController _Character;
 
 	void Start()
 	{
+		Waypoints = route.Waypoints;
 		_Character = GetComponent<CharacterController>();
 	}
 
 	void Update()
 	{
-		if(_CurrentWaypoint < Waypoints.Length)
+		if(_CurrentWaypoint < Waypoints.Count)
 		{
 			Patrol();
 		}else
@@ -59,16 +62,12 @@ public class PredictedMovement : MonoBehaviour
 		/* Rotate and move the character to that position */
 		else
 		{
-			/*rotation = Quaternion.LookRotation(target - transform.position);
-			rotation.x = 0;
-			rotation.y = 0;*/
-			float angle = Mathf.Atan2(target.y, target.x) * Mathf.Rad2Deg;
-			transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
-			transform.Rotate ((Vector3.forward * -120));
+			/* Rotate towards target*/
+			float angle = Mathf.Atan2(move_direction.y, move_direction.x) * Mathf.Rad2Deg;
+			Quaternion q = Quaternion.AngleAxis(angle - 90, Vector3.forward);
+			transform.rotation = Quaternion.Slerp(transform.rotation, q, Time.deltaTime * DampingLook);
 
-			/*transform.rotation = Quaternion.Slerp(transform.rotation, 
-			                                      rotation, 
-			                                      Time.deltaTime * DampingLook);*/
+			/* Smooth movement towards the target */
 			_Character.Move(move_direction.normalized * PatrolSpeed * Time.deltaTime);
 		}
 	}

@@ -2,9 +2,13 @@
 using System.Collections;
 
 public class HungerSystem : MonoBehaviour {
+    //Maximum hunger points
     public int Hunger = 100;
+    //Amount of time in seconds until hunger would reach zero
     public float TimeToStarve = 120;
+    //Local amount of time til we starve
     private float timeLeft;
+    //Local amount of hunger, this is the actual amount.
     private int hunger;
     
 	// Use this for initialization
@@ -13,13 +17,10 @@ public class HungerSystem : MonoBehaviour {
         hunger = Hunger;
 	}
 	
-	// Update is called once per frame
+	// Every frame updates hunger & time left
 	void Update () {
         timeLeft -= Time.deltaTime;
         hunger = Hunger - (int)((timeLeft / TimeToStarve) * Hunger);
-
-        Debug.ClearDeveloperConsole();
-        Debug.Log(hunger);
 
         if (timeLeft >= TimeToStarve)
         {
@@ -27,6 +28,7 @@ public class HungerSystem : MonoBehaviour {
         }
     }
 
+    // On collision with food, increase our time til we die by 10 seconds.
     void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.tag == "Food")

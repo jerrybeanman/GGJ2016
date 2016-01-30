@@ -29,12 +29,13 @@ public class HealthBar : MonoBehaviour {
 	{
 		// Fills the health bar getting the current position and moves it up using the recoveryRate up to maxHunger point.
 		image.fillAmount = Mathf.MoveTowards(image.fillAmount, maxHunger, Time.deltaTime * recoveryRate);
-		if (image.fillAmount == 1.0f) {
+		if (image.fillAmount == 1.0f) 
+		{
 			Debug.Log ("game Over");
 		}
 	}
 
-	void OnTriggerEnter(Collider2D other)
+	void OnTriggerEnter2D(Collider2D other)
 	{
 		if (other.gameObject.tag == "Food")
 		{

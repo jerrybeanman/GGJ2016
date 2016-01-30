@@ -35,7 +35,7 @@ public class Movement : MonoBehaviour {
     {
         Debug.Log("Dashing");
         Vector2 direction = (target.transform.position - transform.position).normalized;
-        GetComponent<Rigidbody2D>().AddForce(direction * 10);
+        GetComponent<Rigidbody2D>().AddForce(direction * 10000);
     }
 }
 

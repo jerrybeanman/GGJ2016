@@ -16,8 +16,8 @@ public class Killable : MonoBehaviour {
     void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.tag == "KillMask")
-            Debug.Log("Right tag");
-        //change value to level of kill. If its a swipe, lunge, etc.
-        //other.gameObject.SendMessage("KillPerson", 1);
+        {
+            Debug.Log("Died");
+        }
     }
 }

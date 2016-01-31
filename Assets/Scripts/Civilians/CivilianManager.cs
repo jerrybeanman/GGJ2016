@@ -44,7 +44,9 @@ public class CivilianManager : MonoBehaviour {
 		{
 			if(!route.Occupied)
 			{
+				/* Randomlly pick a civilian */
 				Civilian tmp = Civilian [Random.Range (0, 2)];
+
 				/* Mark the route as occupied */
 				route.Occupied = true;
 
@@ -54,6 +56,7 @@ public class CivilianManager : MonoBehaviour {
 				/* Assign a random patrol speed to the civilian */
 				tmp.PatrolSpeed = Random.Range (0, MaxPatrolSpeed);
 				tmp.PauseDuration = Random.Range(0, 1f);
+
 				/* Spawn position will be the first waypoint in the route */
 				spawn_pos = route.Waypoints[0];
 

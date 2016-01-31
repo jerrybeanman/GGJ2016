@@ -45,7 +45,7 @@ public class FoodManager : MonoBehaviour {
 				location.Occupied = true;
 
 				/* Pick a random food */
-				Food tmp = FoodTypes[Random.Range(0,2)];
+				Food tmp = FoodTypes[Random.Range(0,3)];
 
 				/* Spawn position will be the first waypoint in the route */
 				spawn_pos = location.transform;

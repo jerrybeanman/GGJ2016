@@ -6,11 +6,15 @@ public class DayNight : MonoBehaviour {
 
     void Start()
     {
-        transform.localScale += new Vector3(18, 18, 0);
+        transform.localScale += new Vector3(40, 30, 0);
     }
 	
 	// Update is called once per frame
 	void Update () {
+        var loc = GameObject.Find("Player 1").transform.position;
+        loc.z = -50;
+        transform.position = loc;
+
         float alpha = 1- Mathf.Abs((hour % 24) - 12)/12;
         if (alpha > .7f)
             alpha = .7f;

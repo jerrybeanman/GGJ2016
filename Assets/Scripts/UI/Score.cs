@@ -17,7 +17,7 @@ public class Score : MonoBehaviour {
 	void FixedUpdate(){
 		// Every second, update the score text.
 		SetCountText ();
-		//LoseCondition.Instance.finalScoreCounter = scoreCounter;
+		GameManager.Instance.finalScoreCounter = scoreCounter;
 	}
 
 	// Increase score by 1.

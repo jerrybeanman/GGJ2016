@@ -37,6 +37,9 @@ public class PauseScript : MonoBehaviour {
 			// Resumes the game and takes away the pause menu when bool paused is false.
 			PauseMenu.SetActive (false);
 			Time.timeScale = 1;
+			if(GameManager.Instance.gameStatus == true){
+				Time.timeScale = 0;
+			}
 		}
 
 		// Mutes the game if bool muted is true and changes the mute button text to "unmute".

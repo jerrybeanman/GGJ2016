@@ -2,15 +2,15 @@
 using UnityEngine.UI;
 using System.Collections;
 
-public class LoseCondition : MonoBehaviour {
-	public static LoseCondition Instance { get; private set; }
-	public Text finalScore;
-
+public class GameManager: MonoBehaviour {
+	public static GameManager Instance { get; private set; }
+	public Text FinalScore;
+	
 	[HideInInspector]
 	GameObject GameOverMenu;
-	public bool gameStatus = false;
 	public float finalScoreCounter = 0.0f;
-
+	public bool gameStatus = false;
+	
 	// Use this for initialization
 	void Start () {
 		GameOverMenu = GameObject.Find("GameOverMenu");
@@ -23,19 +23,17 @@ public class LoseCondition : MonoBehaviour {
 
 		GameOverMenu.SetActive (false);
 	}
-
+	
 	void Update(){
 		if (gameStatus == false) {
 			GameOverMenu.SetActive (false);
+			Time.timeScale = 1;
 		} else if (gameStatus == true) {
-			GameOverMenu.SetActive (true);
 			Time.timeScale = 0;
-			finalScore.text = "Your final score is: " + finalScoreCounter.ToString ();
+			FinalScore.text = "Your final score is: " + finalScoreCounter.ToString ();
+			GameOverMenu.SetActive (true);
+
 		}
 	}
-
-	public void restart(){
-		Application.LoadLevel(1);
-	}
-
+	
 }

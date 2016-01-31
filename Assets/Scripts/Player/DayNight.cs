@@ -3,6 +3,9 @@ using System.Collections;
 
 public class DayNight : MonoBehaviour {
     float hour = 0;
+	public float timeSpeed = 0.005f;
+	public float maxDarkness = 0.5f;
+	public float minDarkness = 0.0f;
 
     void Start()
     {
@@ -16,11 +19,11 @@ public class DayNight : MonoBehaviour {
         transform.position = loc;
 
         float alpha = 1- Mathf.Abs((hour % 24) - 12)/12;
-        if (alpha > .7f)
-            alpha = .7f;
-        else if (alpha < .1f)
-            alpha = .1f;
-        hour += .01f;
+        if (alpha > maxDarkness)
+            alpha = maxDarkness;
+        else if (alpha < minDarkness)
+            alpha = minDarkness;
+        hour += timeSpeed;
         GetComponent<SpriteRenderer>().color =  new Color(1f, 1f, 1f, alpha);
     }
 }

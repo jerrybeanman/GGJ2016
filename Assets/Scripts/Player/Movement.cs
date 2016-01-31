@@ -42,17 +42,26 @@ public class Movement : MonoBehaviour {
 			movex = Input.GetAxis("Horizontal");
 			movey = Input.GetAxis("Vertical");
 
-			/* set animation for idle and moving */
-        	if(movex == 0 && movey == 0)
-				animator.SetBool("isMoving", false);
-			else
-				animator.SetBool("isMoving", true);
+			AnimateMotion ();
 
 			//Add velocity to the object based on this velocity.
 			rb2d.MovePosition(rb2d.position + new Vector2(movex, movey) * Speed * Time.fixedDeltaTime);
 			Rotate ();
 		}	
     }
+
+	void AnimateMotion()
+	{
+		if (movex == 0 && movey == 0) {
+			animator.SetBool ("isMovingForward", false);
+			animator.SetBool ("isMovingBack", false);
+		} else if (movey > 0) {
+			animator.SetBool ("isMovingBack", true);
+		}	else
+			animator.SetBool ("isMovingForward", true);
+
+	}
+
 
     void Update()
     {
@@ -89,7 +98,7 @@ public class Movement : MonoBehaviour {
     {
 		if (other.gameObject.tag == "Human" && target != null && Vector2.Distance(transform.position, other.transform.position) < 20)
         {
-			Debug.Log ("near Death");
+			//Debug.Log ("near Death");
             doneLunge = true;
             transform.position = Vector3.MoveTowards(transform.position, transform.position, 0);
             GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);

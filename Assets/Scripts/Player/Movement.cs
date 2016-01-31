@@ -23,6 +23,7 @@ public class Movement : MonoBehaviour {
 	private Animator 	animator;
 	private Rigidbody2D rb2d;
 	private Transform 	VisionTransform;
+
     //Start of scripts creation. Used to instantiate variables in our case.
     void Start() 
 	{
@@ -37,50 +38,75 @@ public class Movement : MonoBehaviour {
     void FixedUpdate() {
 		if (target == null && doneLunge == false)
         {
-        //Get the x and y movement
+        	//Get the x and y movement
 			movex = Input.GetAxis("Horizontal");
 			movey = Input.GetAxis("Vertical");
-        	if(movex == 0 && movey == 0)
-				animator.SetBool("isMoving", false);
-			else
-				animator.SetBool("isMoving", true);
+
+			AnimateMotion ();
+
 			//Add velocity to the object based on this velocity.
 			rb2d.MovePosition(rb2d.position + new Vector2(movex, movey) * Speed * Time.fixedDeltaTime);
-			if(movex < 0)
-			{
-				transform.localRotation = Quaternion.Euler(0,0, -90);
-			}else if (movex > 0)
-				transform.localRotation = Quaternion.Euler(180,0,90);
+			Rotate ();
 		}	
     }
+
+	void AnimateMotion()
+	{
+		if (movex == 0 && movey == 0) {
+			animator.SetBool ("isMovingForward", false);
+			animator.SetBool ("isMovingBack", false);
+		} else if (movey > 0) {
+			animator.SetBool ("isMovingBack", true);
+		}	else
+			animator.SetBool ("isMovingForward", true);
+
+	}
+
 
     void Update()
     {
         if (target != null && doneLunge == false)
         {
-            float step = 20 * Time.deltaTime;
-            transform.position = Vector3.MoveTowards(transform.position, target.transform.position, step);
-        }else if(movex > 0)
+            float step = 5 * Time.deltaTime;
+            transform.position = Vector2.MoveTowards(transform.position, target.transform.position, step);
+        }
+	}
+
+	void Rotate()
+	{
+		float target;
+		if(movex < 0)
+		{ 
+			target = Mathf.Atan2(movey, movex);
+			transform.localRotation = Quaternion.Euler(0,0, -90);
+			VisionTransform.localRotation = Quaternion.Euler(0f, 0f, target * Mathf.Rad2Deg);
+		}
+		else if (movex > 0)
 		{
+			target = Mathf.Atan2(movey, -movex);
 			transform.localRotation = Quaternion.Euler(180,0,90);
-	
+			VisionTransform.localRotation = Quaternion.Euler(0f, 0f, target * Mathf.Rad2Deg);
 		}
 	}
+	
     void DashToEnemy(GameObject target)
     {
-        Vector2 direction = (target.transform.position - transform.position).normalized;
-		rb2d.AddForce(direction * 10000);
         this.target = target;
     }
 
-    void OnTriggerEnter2D(Collider2D other)
+    void OnCollisionEnter2D(Collision2D other)
     {
-        if (other.gameObject.tag == "Human" && target != null && Vector2.Distance(transform.position, other.transform.position) < 2)
+		if (other.gameObject.tag == "Human" && target != null && Vector2.Distance(transform.position, other.transform.position) < 20)
         {
+			//Debug.Log ("near Death");
             doneLunge = true;
             transform.position = Vector3.MoveTowards(transform.position, transform.position, 0);
             GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
-            Destroy(other.gameObject);
+			doneLunge = false;
+			target = null;
+			if (HealthBar.Instance.image.fillAmount == 1.0f) {
+				LoseCondition.Instance.gameStatus = true;
+			}
         }
     }
 }

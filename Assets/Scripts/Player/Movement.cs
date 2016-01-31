@@ -46,16 +46,14 @@ public class Movement : MonoBehaviour {
 			//Add velocity to the object based on this velocity.
 			rb2d.MovePosition(rb2d.position + new Vector2(movex, movey) * Speed * Time.fixedDeltaTime);
 			Rotate ();
-            var audio = GetComponent<AudioSource>();
 
+            var audio = GetComponent<AudioSource>();
             if (movex + movey == 0.0f)
             {
-                Debug.Log("Pausing");
                 if (audio.isPlaying)
                     audio.Pause();
             } else
             {
-                Debug.Log("Playing");
                 if (!audio.isPlaying)
                     audio.UnPause();
             }
@@ -113,13 +111,20 @@ public class Movement : MonoBehaviour {
     {
 		if (other.gameObject.tag == "Human" && target != null && Vector2.Distance(transform.position, other.transform.position) < 20)
         {
+
+			Destroy(target.gameObject.transform.parent.gameObject);
             doneLunge = true;
             transform.position = Vector3.MoveTowards(transform.position, transform.position, 0);
             GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
 			doneLunge = false;
 			target = null;
-			GameManager.Instance.gameStatus = true;
+			Invoke("GameOver", 2);
         }
     }
+
+	void GameOver()
+	{
+		GameManager.Instance.gameStatus = true;
+	}
 }
 

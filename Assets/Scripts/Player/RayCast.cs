@@ -36,7 +36,7 @@ public class RayCast : MonoBehaviour {
     }
 
     void buildPointsAndMesh() {
-        GameObject player = GameObject.Find("Player 1");
+        GameObject player = GameObject.Find("VisionCone");
         if (player == null)
             return;
         for (int i = 0; i < casts; i++) {

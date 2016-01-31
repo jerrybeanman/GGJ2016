@@ -9,7 +9,6 @@ public enum FoodTypes
 };
 
 public class Food : MonoBehaviour 
-{
-
+{	
 	public FoodTypes type;
 }

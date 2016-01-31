@@ -49,11 +49,7 @@ public class Movement : MonoBehaviour {
 
 			//Add velocity to the object based on this velocity.
 			rb2d.MovePosition(rb2d.position + new Vector2(movex, movey) * Speed * Time.fixedDeltaTime);
-			if(movex < 0)
-			{
-				transform.localRotation = Quaternion.Euler(0,0, -90);
-			}else if (movex > 0)
-				transform.localRotation = Quaternion.Euler(180,0,90);
+
 		}	
     }
 
@@ -69,6 +65,15 @@ public class Movement : MonoBehaviour {
 	
 		}
 	}
+
+	void Rotate()
+	{
+		if(movex < 0)
+			transform.localRotation = Quaternion.Euler(0,0, -90);
+		else if (movex > 0)
+			transform.localRotation = Quaternion.Euler(180,0,90);
+	}
+	
     void DashToEnemy(GameObject target)
     {
         Vector2 direction = (target.transform.position - transform.position).normalized;

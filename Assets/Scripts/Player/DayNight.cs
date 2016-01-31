@@ -6,7 +6,7 @@ public class DayNight : MonoBehaviour {
 
     void Start()
     {
-        transform.localScale += new Vector3(40, 30, 0);
+        transform.localScale += new Vector3(70, 40, 0);
     }
 	
 	// Update is called once per frame

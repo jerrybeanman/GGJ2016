@@ -7,9 +7,7 @@ public class Killable : MonoBehaviour {
     void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.tag == "KillMask")
-        {
-            Debug.Log("Died");
-            
+        {   
             other.SendMessage("DashToEnemy", this.gameObject);
         }
     }

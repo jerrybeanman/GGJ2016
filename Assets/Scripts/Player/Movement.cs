@@ -93,13 +93,13 @@ public class Movement : MonoBehaviour {
 	void Rotate()
 	{
 		float target;
-		if(movex < 0)
+		if(movex < 0 || movey < 0)
 		{ 
 			target = Mathf.Atan2(movey, movex);
 			transform.localRotation = Quaternion.Euler(0,0, -90);
 			VisionTransform.localRotation = Quaternion.Euler(0f, 0f, target * Mathf.Rad2Deg);
 		}
-		else if (movex > 0)
+		else if (movex > 0 || movey > 0)
 		{
 			target = Mathf.Atan2(movey, -movex);
 			transform.localRotation = Quaternion.Euler(180,0,90);

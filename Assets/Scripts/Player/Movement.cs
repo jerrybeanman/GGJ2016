@@ -37,13 +37,16 @@ public class Movement : MonoBehaviour {
     void FixedUpdate() {
 		if (target == null && doneLunge == false)
         {
-        //Get the x and y movement
+        	//Get the x and y movement
 			movex = Input.GetAxis("Horizontal");
 			movey = Input.GetAxis("Vertical");
+
+			/* set animation for idle and moving */
         	if(movex == 0 && movey == 0)
 				animator.SetBool("isMoving", false);
 			else
 				animator.SetBool("isMoving", true);
+
 			//Add velocity to the object based on this velocity.
 			rb2d.MovePosition(rb2d.position + new Vector2(movex, movey) * Speed * Time.fixedDeltaTime);
 			if(movex < 0)

@@ -68,6 +68,9 @@ public class CivilianManager : MonoBehaviour {
                     if (child != null)
                     {
                         child.transform.parent = transform;
+                    } else
+                    {
+                        route.Occupied = false;
                     }
                 } catch (System.Exception)
                 {

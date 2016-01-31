@@ -7,8 +7,13 @@ public class Killable : MonoBehaviour {
     void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.tag == "KillMask")
-        {   
-            other.SendMessage("DashToEnemy", this.gameObject);
+        {
+            RaycastHit2D hit;
+            hit = Physics2D.Linecast(transform.position, GameObject.Find("Player 1").transform.position, 1 << LayerMask.NameToLayer("Wall"));
+            if (hit.collider == null)
+            {
+                other.SendMessage("DashToEnemy", this.gameObject);
+            }
         }
     }
 }

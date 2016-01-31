@@ -47,7 +47,20 @@ public class Movement : MonoBehaviour {
 			//Add velocity to the object based on this velocity.
 			rb2d.MovePosition(rb2d.position + new Vector2(movex, movey) * Speed * Time.fixedDeltaTime);
 			Rotate ();
-		}	
+            var audio = GetComponent<AudioSource>();
+
+            if (movex + movey == 0.0f)
+            {
+                Debug.Log("Pausing");
+                if (audio.isPlaying)
+                    audio.Pause();
+            } else
+            {
+                Debug.Log("Playing");
+                if (!audio.isPlaying)
+                    audio.UnPause();
+            }
+        }	
     }
 
 	void AnimateMotion()
@@ -67,6 +80,11 @@ public class Movement : MonoBehaviour {
     {
         if (target != null && doneLunge == false)
         {
+            var freq = 44100;
+            var audio = GetComponent<AudioSource>();
+            audio.clip = AudioClip.Create("Lunge", freq * 2, 1, freq, true);
+            audio.volume = 1;
+            audio.PlayOneShot(audio.clip);
             float step = 15 * Time.deltaTime;
             transform.position = Vector2.MoveTowards(transform.position, target.transform.position, step);
         }

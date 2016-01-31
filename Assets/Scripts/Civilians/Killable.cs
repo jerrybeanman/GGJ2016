@@ -2,9 +2,12 @@
 using System.Collections;
 
 public class Killable : MonoBehaviour {
+	AudioSource audio;
+	AudioSource ParentAudio;
     void Start()
     {
-        var audio = GetComponent<AudioSource>();
+        audio = GetComponent<AudioSource>();
+		ParentAudio = transform.parent.gameObject.GetComponent<AudioSource>();
         if (audio.isPlaying)
                 audio.Pause();
     }
@@ -18,12 +21,11 @@ public class Killable : MonoBehaviour {
             if (hit.collider == null)
             {
                 other.SendMessage("DashToEnemy", this.gameObject);
-                var audio = GetComponent<AudioSource>();
-                if (!audio.isPlaying)
-                    audio.UnPause();
-                var audio2 = GetComponentInParent<AudioSource>();
-                if (!audio2.isPlaying)
-                    audio2.UnPause();
+				Debug.Log("asdfasdf");
+				audio.Play();
+				ParentAudio.Play();
+				/*AudioSource.PlayClipAtPoint(audio.clip, transform.position);
+				AudioSource.PlayClipAtPoint(ParentAudio.clip, transform.position);*/
             }
         }
     }

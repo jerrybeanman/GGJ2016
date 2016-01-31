@@ -47,7 +47,6 @@ public class RayCast : MonoBehaviour {
 
     void buildPointsAndMesh() {
         GameObject player = GameObject.Find("VisionCone");
-        Debug.Log("angle: " + Mathf.Cos(Mathf.Deg2Rad * player.transform.eulerAngles.z - 90));
         if (player == null)
             return;
         for (int i = 0; i < casts; i++) {

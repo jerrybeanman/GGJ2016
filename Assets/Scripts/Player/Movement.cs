@@ -10,7 +10,7 @@ using UnityEngine.UI;
 public class Movement : MonoBehaviour {
     //Speed to move at
     public float Speed = 0;
-
+	public  int lungespeed;
     //Horizontal movement. 1 is right, -1 is left, 0 is no movement.
     private float movex;
 
@@ -19,7 +19,6 @@ public class Movement : MonoBehaviour {
 
     private GameObject target = null;
     private bool doneLunge = false;
-    
 	private Animator 	animator;
 	private Rigidbody2D rb2d;
 	private Transform 	VisionTransform;
@@ -80,12 +79,10 @@ public class Movement : MonoBehaviour {
     {
         if (target != null && doneLunge == false)
         {
-            var freq = 44100;
-            var audio = GetComponent<AudioSource>();
-            audio.clip = AudioClip.Create("Lunge", freq * 2, 1, freq, true);
-            audio.volume = 1;
-            audio.PlayOneShot(audio.clip);
-            float step = 15 * Time.deltaTime;
+			/* Play lunge animation */
+			animator.SetBool("Lunge", true);
+
+            float step = lungespeed * Time.deltaTime;
             transform.position = Vector2.MoveTowards(transform.position, target.transform.position, step);
         }
 	}
@@ -116,7 +113,6 @@ public class Movement : MonoBehaviour {
     {
 		if (other.gameObject.tag == "Human" && target != null && Vector2.Distance(transform.position, other.transform.position) < 20)
         {
-			Destroy(other.gameObject);
             doneLunge = true;
             transform.position = Vector3.MoveTowards(transform.position, transform.position, 0);
             GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);

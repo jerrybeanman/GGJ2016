@@ -7,6 +7,7 @@ public class RayCast : MonoBehaviour {
     public int casts = 45;
     public int viewDistance = 20;
     private int degreeOfCasts;
+    private float playerX, playerY;
 
     // Use this for initialization
     void Start() {
@@ -35,13 +36,23 @@ public class RayCast : MonoBehaviour {
         buildPointsAndMesh();
     }
 
+    float realAngle() {
+        if (Input.GetAxis("Horizontal") != 0)
+            playerX = Input.GetAxis("Horizontal");
+        if (Input.GetAxis("Vertical") != 0)
+            playerY = Input.GetAxis("Vertical");
+        float a = Mathf.Atan2(playerX, playerY) * 180 / Mathf.PI;
+        return a + Mathf.Ceil(-a / 360) * 360;
+    }
+
     void buildPointsAndMesh() {
         GameObject player = GameObject.Find("VisionCone");
+        Debug.Log("angle: " + Mathf.Cos(Mathf.Deg2Rad * player.transform.eulerAngles.z - 90));
         if (player == null)
             return;
         for (int i = 0; i < casts; i++) {
-            Vector2 checker = new Vector2(Mathf.Cos(Mathf.Deg2Rad * i * degreeOfCasts) + Mathf.Sin(Mathf.Deg2Rad * -player.transform.eulerAngles.z) * .9f, 
-                Mathf.Sin(Mathf.Deg2Rad * i * degreeOfCasts) + Mathf.Cos(Mathf.Deg2Rad * -player.transform.eulerAngles.z) * .9f);
+            Vector2 checker = new Vector2(Mathf.Cos(Mathf.Deg2Rad * i * degreeOfCasts) + Mathf.Sin(Mathf.Deg2Rad * realAngle()) * .9f, 
+                Mathf.Sin(Mathf.Deg2Rad * i * degreeOfCasts) + Mathf.Cos(Mathf.Deg2Rad * -realAngle()) * .9f);
             shadowPoints[i] = LineCastColl(transform.position, checker * viewDistance);
         }
         buildMesh(shadowPoints);

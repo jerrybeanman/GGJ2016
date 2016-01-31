@@ -23,6 +23,7 @@ public class Movement : MonoBehaviour {
 	private Animator 	animator;
 	private Rigidbody2D rb2d;
 	private Transform 	VisionTransform;
+
     //Start of scripts creation. Used to instantiate variables in our case.
     void Start() 
 	{
@@ -96,14 +97,17 @@ public class Movement : MonoBehaviour {
 
     void OnCollisionEnter2D(Collision2D other)
     {
-        if (other.gameObject.tag == "Human" && target != null && Vector2.Distance(transform.position, other.transform.position) < 2)
+		if (other.gameObject.tag == "Human" && target != null && Vector2.Distance(transform.position, other.transform.position) < 20)
         {
-			Debug.Log("asdfasdf");
+			Debug.Log ("near Death");
             doneLunge = true;
             transform.position = Vector3.MoveTowards(transform.position, transform.position, 0);
             GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
 			doneLunge = false;
 			target = null;
+			if (HealthBar.Instance.image.fillAmount == 1.0f) {
+				LoseCondition.Instance.gameStatus = true;
+			}
         }
     }
 }

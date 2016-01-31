@@ -25,7 +25,10 @@ public class Civilian : MonoBehaviour
 	
 	void Start()
 	{
-		Waypoints = route.Waypoints;
+        var audio = GetComponent<AudioSource>();
+        if (audio.isPlaying)
+            audio.Pause();
+        Waypoints = route.Waypoints;
 		_Character = GetComponent<CharacterController>();
 	}
 

@@ -23,4 +23,6 @@ public class SpawnPoints : MonoBehaviour {
 			SpawnLocations.Add(child.gameObject.GetComponent<LocationTracker>());
 		return SpawnLocations;
 	}
+
+
 }

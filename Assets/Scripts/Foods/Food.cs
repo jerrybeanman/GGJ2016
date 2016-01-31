@@ -11,4 +11,10 @@ public enum FoodTypes
 public class Food : MonoBehaviour 
 {	
 	public FoodTypes type;
+
+    void Start()
+    {
+        var audio = GetComponent<AudioSource>();
+        audio.Pause();
+    }
 }

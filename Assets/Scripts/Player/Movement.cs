@@ -67,7 +67,7 @@ public class Movement : MonoBehaviour {
     {
         if (target != null && doneLunge == false)
         {
-            float step = 5 * Time.deltaTime;
+            float step = 15 * Time.deltaTime;
             transform.position = Vector2.MoveTowards(transform.position, target.transform.position, step);
         }
 	}

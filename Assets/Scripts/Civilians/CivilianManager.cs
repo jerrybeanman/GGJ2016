@@ -60,13 +60,24 @@ public class CivilianManager : MonoBehaviour {
 				/* Spawn position will be the first waypoint in the route */
 				spawn_pos = route.Waypoints[0];
 
-				/* Spawn civilian at destination as the child of this class */
-				Civilian child = Instantiate(tmp, spawn_pos.position, spawn_pos.rotation) as Civilian;
-                if (child != null)
+                /* Spawn civilian at destination as the child of this class */
+                Civilian child = null;
+                try
                 {
-                    child.transform.parent = transform;
+                    child = Instantiate(tmp, spawn_pos.position, spawn_pos.rotation) as Civilian;
+                    if (child != null)
+                    {
+                        child.transform.parent = transform;
+                        route.Occupied = false;
+                    }
+                } catch (System.Exception)
+                {
+                    if (child != null)
+                        child.transform.parent = transform;
                     route.Occupied = false;
                 }
+				
+                
 			}
 		}
 	}

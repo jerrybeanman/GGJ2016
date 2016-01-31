@@ -37,10 +37,10 @@ public class RayCast : MonoBehaviour {
     }
 
     float realAngle() {
-        if (Input.GetAxis("Horizontal") != 0)
+        if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D)) {
             playerX = Input.GetAxis("Horizontal");
-        if (Input.GetAxis("Vertical") != 0)
             playerY = Input.GetAxis("Vertical");
+        }
         float a = Mathf.Atan2(playerX, playerY) * 180 / Mathf.PI;
         return a + Mathf.Ceil(-a / 360) * 360;
     }

@@ -20,11 +20,15 @@ public class Civilian : MonoBehaviour
 	private float 				_CurTime;
 	private int 				_CurrentWaypoint;
 	private CharacterController _Character;
+	private Animator			_Animator;
 
 	
 	void Start()
 	{
-		Waypoints = route.Waypoints;
+        var audio = GetComponent<AudioSource>();
+        if (audio.isPlaying)
+            audio.Pause();
+        Waypoints = route.Waypoints;
 		_Character = GetComponent<CharacterController>();
 	}
 
@@ -49,6 +53,7 @@ public class Civilian : MonoBehaviour
 		/* the square root of (x*x + y*y). If we have reached target */
 		if(move_direction.magnitude < 0.5)
 		{
+
 			if(_CurTime == 0)
 				/* pause at the waypoint */
 				_CurTime = Time.time;
@@ -64,6 +69,7 @@ public class Civilian : MonoBehaviour
 		/* Rotate and move the character to that position */
 		else
 		{
+
 			/* Rotate towards target */
 			float p = target.x - transform.position.x;
 			if(p > 0)

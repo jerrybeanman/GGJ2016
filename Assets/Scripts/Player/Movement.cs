@@ -10,7 +10,7 @@ using UnityEngine.UI;
 public class Movement : MonoBehaviour {
     //Speed to move at
     public float Speed = 0;
-
+	public  int lungespeed;
     //Horizontal movement. 1 is right, -1 is left, 0 is no movement.
     private float movex;
 
@@ -19,7 +19,6 @@ public class Movement : MonoBehaviour {
 
     private GameObject target = null;
     private bool doneLunge = false;
-    
 	private Animator 	animator;
 	private Rigidbody2D rb2d;
 	private Transform 	VisionTransform;
@@ -47,7 +46,18 @@ public class Movement : MonoBehaviour {
 			//Add velocity to the object based on this velocity.
 			rb2d.MovePosition(rb2d.position + new Vector2(movex, movey) * Speed * Time.fixedDeltaTime);
 			Rotate ();
-		}	
+
+            var audio = GetComponent<AudioSource>();
+            if (movex + movey == 0.0f)
+            {
+                if (audio.isPlaying)
+                    audio.Pause();
+            } else
+            {
+                if (!audio.isPlaying)
+                    audio.UnPause();
+            }
+        }	
     }
 
 	void AnimateMotion()
@@ -67,7 +77,10 @@ public class Movement : MonoBehaviour {
     {
         if (target != null && doneLunge == false)
         {
-            float step = 15 * Time.deltaTime;
+			/* Play lunge animation */
+			animator.SetBool("Lunge", true);
+
+            float step = lungespeed * Time.deltaTime;
             transform.position = Vector2.MoveTowards(transform.position, target.transform.position, step);
         }
 	}
@@ -75,13 +88,13 @@ public class Movement : MonoBehaviour {
 	void Rotate()
 	{
 		float target;
-		if(movex < 0)
+		if(movex < 0 || movey < 0)
 		{ 
 			target = Mathf.Atan2(movey, movex);
 			transform.localRotation = Quaternion.Euler(0,0, -90);
 			VisionTransform.localRotation = Quaternion.Euler(0f, 0f, target * Mathf.Rad2Deg);
 		}
-		else if (movex > 0)
+		else if (movex > 0 || movey > 0)
 		{
 			target = Mathf.Atan2(movey, -movex);
 			transform.localRotation = Quaternion.Euler(180,0,90);
@@ -98,14 +111,20 @@ public class Movement : MonoBehaviour {
     {
 		if (other.gameObject.tag == "Human" && target != null && Vector2.Distance(transform.position, other.transform.position) < 20)
         {
+
+			Destroy(target.gameObject.transform.parent.gameObject);
             doneLunge = true;
             transform.position = Vector3.MoveTowards(transform.position, transform.position, 0);
             GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
 			doneLunge = false;
 			target = null;
-			Time.timeScale = 0;
-			GameManager.Instance.gameStatus = true;
+			Invoke("GameOver", 2);
         }
     }
+
+	void GameOver()
+	{
+		GameManager.Instance.gameStatus = true;
+	}
 }
 

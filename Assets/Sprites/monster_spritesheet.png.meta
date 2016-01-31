@@ -1,14 +1,14 @@
 fileFormatVersion: 2
-guid: 84addc7ac600d4249ba44f6176aff393
-timeCreated: 1454271334
+guid: d0bef018a9b2df247a724d8cedade934
+timeCreated: 1454273861
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
-    21300000: woman_walk_0
-    21300002: woman_walk_1
-    21300004: woman_walk_2
-    21300006: woman_walk_3
-    21300008: woman_walk_4
+    21300000: monster_spritesheet_0
+    21300002: monster_spritesheet_1
+    21300004: monster_spritesheet_2
+    21300006: monster_spritesheet_3
+    21300008: monster_spritesheet_4
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -55,53 +55,53 @@ TextureImporter:
   buildTargetSettings: []
   spriteSheet:
     sprites:
-    - name: woman_walk_0
+    - name: monster_spritesheet_0
       rect:
         serializedVersion: 2
-        x: 47
+        x: 28
         y: 0
-        width: 81
-        height: 154
+        width: 127
+        height: 159
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: woman_walk_1
+    - name: monster_spritesheet_1
       rect:
         serializedVersion: 2
-        x: 48
-        y: 137
-        width: 15
-        height: 23
+        x: 167
+        y: 11
+        width: 168
+        height: 149
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: woman_walk_2
+    - name: monster_spritesheet_2
       rect:
         serializedVersion: 2
-        x: 204
-        y: 0
-        width: 81
-        height: 160
+        x: 365
+        y: 26
+        width: 197
+        height: 134
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: woman_walk_3
+    - name: monster_spritesheet_3
       rect:
         serializedVersion: 2
-        x: 361
+        x: 575
         y: 0
-        width: 80
+        width: 203
+        height: 129
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: monster_spritesheet_4
+      rect:
+        serializedVersion: 2
+        x: 791
+        y: 0
+        width: 135
         height: 156
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: woman_walk_4
-      rect:
-        serializedVersion: 2
-        x: 517
-        y: 0
-        width: 81
-        height: 158
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}

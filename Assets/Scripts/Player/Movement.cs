@@ -35,29 +35,23 @@ public class Movement : MonoBehaviour {
     
     //Called every frame
     void FixedUpdate() {
-<<<<<<< HEAD
-        //Get the x and y movement
-		movex = Input.GetAxis("Horizontal");
-		movey = Input.GetAxis("Vertical");
-        if(movex == 0 && movey == 0)
-			animator.SetBool("isMoving", false);
-		else
-			animator.SetBool("isMoving", true);
-		//Add velocity to the object based on this velocity.
-		rb2d.MovePosition(rb2d.position + new Vector2(movex, movey) * Speed * Time.fixedDeltaTime);
-		if(movex < 0)
-		{
-			transform.localRotation = Quaternion.Euler(0,0, -90);
-
-=======
-        if (target == null && doneLunge == false)
+		if (target == null && doneLunge == false)
         {
-            //Get the x and y movement
-            movex = Input.GetAxis("Horizontal");
-            movey = Input.GetAxis("Vertical");
-            //Add velocity to the object based on this velocity.
-            GetComponent<Rigidbody2D>().velocity = new Vector2(movex * Speed, movey * Speed);
-        }
+        //Get the x and y movement
+			movex = Input.GetAxis("Horizontal");
+			movey = Input.GetAxis("Vertical");
+        	if(movex == 0 && movey == 0)
+				animator.SetBool("isMoving", false);
+			else
+				animator.SetBool("isMoving", true);
+			//Add velocity to the object based on this velocity.
+			rb2d.MovePosition(rb2d.position + new Vector2(movex, movey) * Speed * Time.fixedDeltaTime);
+			if(movex < 0)
+			{
+				transform.localRotation = Quaternion.Euler(0,0, -90);
+			}else if (movex > 0)
+				transform.localRotation = Quaternion.Euler(180,0,90);
+		}	
     }
 
     void Update()
@@ -66,11 +60,7 @@ public class Movement : MonoBehaviour {
         {
             float step = 20 * Time.deltaTime;
             transform.position = Vector3.MoveTowards(transform.position, target.transform.position, step);
-        }
-    }
->>>>>>> 876720857c999be186d3bde7b07606b1936aab9e
-
-		}else if(movex > 0)
+        }else if(movex > 0)
 		{
 			transform.localRotation = Quaternion.Euler(180,0,90);
 	
@@ -78,10 +68,8 @@ public class Movement : MonoBehaviour {
 	}
     void DashToEnemy(GameObject target)
     {
-<<<<<<< HEAD
         Vector2 direction = (target.transform.position - transform.position).normalized;
 		rb2d.AddForce(direction * 10000);
-=======
         this.target = target;
     }
 
@@ -94,7 +82,6 @@ public class Movement : MonoBehaviour {
             GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
             Destroy(other.gameObject);
         }
->>>>>>> 876720857c999be186d3bde7b07606b1936aab9e
     }
 }
 

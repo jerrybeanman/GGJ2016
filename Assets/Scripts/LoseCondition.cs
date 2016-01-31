@@ -26,7 +26,6 @@ public class LoseCondition : MonoBehaviour {
 
 	void Update(){
 		if (gameStatus == false) {
-			Time.timeScale = 1;
 			GameOverMenu.SetActive (false);
 		} else if (gameStatus == true) {
 			GameOverMenu.SetActive (true);
@@ -36,7 +35,7 @@ public class LoseCondition : MonoBehaviour {
 	}
 
 	public void restart(){
-		Application.LoadLevel(0);
+		Application.LoadLevel(1);
 	}
 
 }

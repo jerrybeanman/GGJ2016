@@ -58,7 +58,7 @@ public class PauseScript : MonoBehaviour {
 
 	// Button function to go back to main menu.
 	public void MainMenu(){
-		Application.LoadLevel(1);
+		Application.LoadLevel(0);
 	}
 
 	// Button function to mute the game.

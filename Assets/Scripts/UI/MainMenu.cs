@@ -5,7 +5,7 @@ public class MainMenu : MonoBehaviour {
 
 	// Button function to start the game with level 0.
 	public void StartGame(){
-		Application.LoadLevel(0);
+		Application.LoadLevel(1);
 	}
 
 	// Button fucntion to quit the game.

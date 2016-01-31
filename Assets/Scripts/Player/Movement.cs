@@ -98,15 +98,13 @@ public class Movement : MonoBehaviour {
     {
 		if (other.gameObject.tag == "Human" && target != null && Vector2.Distance(transform.position, other.transform.position) < 20)
         {
-			//Debug.Log ("near Death");
             doneLunge = true;
             transform.position = Vector3.MoveTowards(transform.position, transform.position, 0);
             GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
 			doneLunge = false;
 			target = null;
-			if (HealthBar.Instance.image.fillAmount == 1.0f) {
-				LoseCondition.Instance.gameStatus = true;
-			}
+			Time.timeScale = 0;
+			GameManager.Instance.gameStatus = true;
         }
     }
 }

@@ -31,7 +31,8 @@ public class HealthBar : MonoBehaviour {
 		image.fillAmount = Mathf.MoveTowards(image.fillAmount, maxHunger, Time.deltaTime * recoveryRate);
 		if (image.fillAmount == 1.0f) 
 		{
-			//Debug.Log ("game Over");
+			GameManager.Instance.gameStatus = true;
+			Time.timeScale = 0;
 		}
 	}
 }

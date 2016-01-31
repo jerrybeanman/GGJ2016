@@ -65,9 +65,8 @@ public class Civilian : MonoBehaviour
 		else
 		{
 			/* Rotate towards target */
-			float angle = Mathf.Atan2(move_direction.y, move_direction.x) * Mathf.Rad2Deg;
-			Quaternion q = Quaternion.AngleAxis(angle - 90, Vector3.forward);
-			transform.rotation = Quaternion.Slerp(transform.rotation, q, Time.deltaTime * DampingLook);
+			if(move_direction.x > transform.position.x)
+				transform.localRotation = Quaternion.Euler(0,180,0);
 
 			/* Smooth movement towards the target */
 			_Character.Move(move_direction.normalized * PatrolSpeed * Time.deltaTime);

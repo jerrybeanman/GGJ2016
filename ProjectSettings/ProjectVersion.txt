@@ -1,6 +1,3 @@
-<<<<<<< HEAD
-m_EditorVersion: 5.3.1f1
-=======
-m_EditorVersion: 5.3.1p4
 >>>>>>> master
+m_EditorVersion: 5.2.4f1
 m_StandardAssetsVersion: 0

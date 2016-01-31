@@ -16,7 +16,7 @@ public class ConeAdjustment : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		transform.localScale = new Vector2 (coneX, coneY);
+		/*transform.localScale = new Vector2 (coneX, coneY);
 		if (coneX >= 0.5f) {
 			transform.localScale = new Vector2 (0.5f, coneY);
 		}
@@ -25,6 +25,6 @@ public class ConeAdjustment : MonoBehaviour {
 		}
 		if (HealthBar.Instance.image.fillAmount >= 0.3f) {
 			coneY = HealthBar.Instance.image.fillAmount;
-		}
+		}*/
 	}
 }

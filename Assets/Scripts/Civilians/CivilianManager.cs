@@ -6,7 +6,7 @@ using System.Linq;
 public class CivilianManager : MonoBehaviour {
 
 	public static CivilianManager Instance { get; private set; }
-	public Civilian Civilian;	
+	public List<Civilian> Civilian;	
 	public int 		SpawnNumber;
 	public int 		CivilianSpawnInterval;
 	public float 	MaxPatrolSpeed;
@@ -44,20 +44,21 @@ public class CivilianManager : MonoBehaviour {
 		{
 			if(!route.Occupied)
 			{
+				Civilian tmp = Civilian[Random.Range(0,1)];
 				/* Mark the route as occupied */
 				route.Occupied = true;
 
 				/* Assign the random route the civilian will take*/
-				Civilian.route = route;
+				tmp.route = route;
 
 				/* Assign a random patrol speed to the civilian */
-				Civilian.PatrolSpeed = Random.Range (0, MaxPatrolSpeed);
-				Civilian.PauseDuration = Random.Range(0, 1f);
+				tmp.PatrolSpeed = Random.Range (0, MaxPatrolSpeed);
+				tmp.PauseDuration = Random.Range(0, 1f);
 				/* Spawn position will be the first waypoint in the route */
 				spawn_pos = route.Waypoints[0];
 
 				/* Spawn civilian at destination as the child of this class */
-				Civilian child = Instantiate(Civilian, spawn_pos.position, spawn_pos.rotation) as Civilian;
+				Civilian child = Instantiate(tmp, spawn_pos.position, spawn_pos.rotation) as Civilian;
 				child.transform.parent = transform;
 
 			}

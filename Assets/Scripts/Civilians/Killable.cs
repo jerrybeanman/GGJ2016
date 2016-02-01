@@ -22,10 +22,8 @@ public class Killable : MonoBehaviour {
             {
                 other.SendMessage("DashToEnemy", this.gameObject);
 				Debug.Log("asdfasdf");
-				audio.Play();
-				ParentAudio.Play();
-				/*AudioSource.PlayClipAtPoint(audio.clip, transform.position);
-				AudioSource.PlayClipAtPoint(ParentAudio.clip, transform.position);*/
+				AudioSource.PlayClipAtPoint(audio.clip, transform.position, 100.0f);
+				AudioSource.PlayClipAtPoint(ParentAudio.clip, transform.position, 100.0f);
             }
         }
     }

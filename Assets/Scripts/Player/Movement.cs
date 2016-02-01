@@ -116,7 +116,6 @@ public class Movement : MonoBehaviour {
             doneLunge = true;
             transform.position = Vector3.MoveTowards(transform.position, transform.position, 0);
             GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
-			doneLunge = false;
 			target = null;
 			Invoke("GameOver", 2);
         }
